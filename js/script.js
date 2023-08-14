@@ -7,6 +7,68 @@ document.querySelector("ul i").onclick = () => {
     document.querySelector("ul").classList.toggle("show")
 }
 
+// Night mode
+
+let moonIcon = document.querySelector("nav .moon")
+let sunIcon = document.querySelector("nav .sun")
+
+let aboutSection = document.querySelector(".about-section")
+
+let templetes = document.querySelectorAll(".templete")
+
+// Check if there is mode in localStorage and set it to the website
+if (window.localStorage.getItem("mode") === "light") {
+    document.querySelector("body").classList.remove("dark-mode")
+    showMoonIcon()
+    aboutSection.classList.remove("night-mode")
+    removeNightModeBackground()
+} else {
+    document.querySelector("body").classList.add("dark-mode")
+    showSunIcon()
+    aboutSection.classList.add("night-mode")
+    showNightModeBackground()
+}
+
+// Showing night mode
+moonIcon.addEventListener("click" , () => {
+    document.querySelector("body").classList.add("dark-mode")
+    showSunIcon()
+    showNightModeBackground()
+    aboutSection.classList.add("night-mode")
+    window.localStorage.setItem("mode" , "dark")
+})
+
+// Showing light mode
+sunIcon.addEventListener("click" , () => {
+    document.querySelector("body").classList.remove("dark-mode")
+    showMoonIcon()
+    removeNightModeBackground()
+    aboutSection.classList.remove("night-mode")
+    window.localStorage.setItem("mode" , "light")
+})
+
+function showMoonIcon() {
+    sunIcon.classList.add("hide")
+    moonIcon.classList.remove("hide")
+}
+
+function showSunIcon() {
+    sunIcon.classList.remove("hide")
+    moonIcon.classList.add("hide")
+}
+
+function removeNightModeBackground() {
+    templetes.forEach(e => {
+        e.classList.remove("night-mode")
+    })
+}
+
+function showNightModeBackground() {
+    templetes.forEach(e => {
+        e.classList.add("night-mode")
+    })
+}
+
 // End
 // Portfolio
 
@@ -63,90 +125,76 @@ showLessOnDekstop.onclick = () => {
 
 // filter functions
 
+let allFilters = document.querySelectorAll(".filter p")
+
 let showAll = document.querySelector(".all")
 let frontEnd = document.querySelector(".frontend")
 let freeCss = document.querySelector(".free-css")
 let elzero = document.querySelector(".elzero")
 
-let allFrontend = document.querySelectorAll(".frontend-challenge")
-let allFreeCss = document.querySelectorAll(".free-css-challenge")
-let elzeroChallenges = document.querySelectorAll(".elzero-challenge")
+allFilters.forEach(e => {
+    e.onclick = () => {
+        allFilters.forEach(e => {
+            e.classList.remove("active")
+        })
+        e.classList.add("active")
+    }
+})
 
-showAll.onclick = () => {
-    allFrontend.forEach((e) => {
-        e.style.display = "block"
+showAll.addEventListener("click" , () => {
+    templetes.forEach(e => {
+        e.classList.remove("hide")
+        e.classList.add("show")
     })
-    allFreeCss.forEach((e) => {
-        e.style.display = "block"
-    })
-    elzeroChallenges.forEach((e) => {
-        e.style.display = "block"
-    })
-    showAll.classList.add("active")
-    freeCss.classList.remove("active")
-    frontEnd.classList.remove("active")
-    elzero.classList.remove("active")
     showMore.style.display = "none"
     showMoreOnDesktop.style.display = "none"
     showLessOnDekstop.style.display = "none"
-}
+})
 
-frontEnd.onclick = () => {
-    allFrontend.forEach((e) => {
-        e.style.display = "block"
+frontEnd.addEventListener("click" , () => {
+    templetes.forEach(e => {
+        if (e.classList.contains("frontend-challenge")) {
+            e.classList.remove("hide")
+            e.classList.add("show")
+        } else {
+            e.classList.add("hide")
+            e.classList.remove("show")
+        }
     })
-    allFreeCss.forEach((e) => {
-        e.style.display = "none"
-    })
-        elzeroChallenges.forEach((e) => {
-        e.style.display = "none"
-    })
-    frontEnd.classList.add("active")
-    showAll.classList.remove("active")
-    freeCss.classList.remove("active")
-    elzero.classList.remove("active")
     showMore.style.display = "none"
     showMoreOnDesktop.style.display = "none"
     showLessOnDekstop.style.display = "none"
-}
+})
 
-freeCss.onclick = () => {
-    allFrontend.forEach((e) => {
-        e.style.display = "none"
+freeCss.addEventListener("click" , () =>{
+    templetes.forEach(e => {
+        if (e.classList.contains("free-css-challenge")) {
+            e.classList.remove("hide")
+            e.classList.add("show")
+        } else {
+            e.classList.add("hide")
+            e.classList.remove("show")
+        }
     })
-    allFreeCss.forEach((e) => {
-        e.style.display = "block"
-    })
-    elzeroChallenges.forEach((e) => {
-        e.style.display = "none"
-    })
-    freeCss.classList.add("active")
-    frontEnd.classList.remove("active")
-    showAll.classList.remove("active")
-    elzero.classList.remove("active")
     showMore.style.display = "none"
     showMoreOnDesktop.style.display = "none"
     showLessOnDekstop.style.display = "none"
-}
+})
 
-elzero.onclick = () => {
-    allFrontend.forEach((e) => {
-        e.style.display = "none"
+elzero.addEventListener("click" , () =>{
+    templetes.forEach(e => {
+        if (e.classList.contains("elzero-challenge")) {
+            e.classList.remove("hide")
+            e.classList.add("show")
+        } else {
+            e.classList.add("hide")
+            e.classList.remove("show")
+        }
     })
-    allFreeCss.forEach((e) => {
-        e.style.display = "none"
-    })
-    elzeroChallenges.forEach((e) => {
-        e.style.display = "block"
-    })
-    showAll.classList.remove("active")
-    freeCss.classList.remove("active")
-    frontEnd.classList.remove("active")
-    elzero.classList.add("active")
     showMore.style.display = "none"
     showMoreOnDesktop.style.display = "none"
     showLessOnDekstop.style.display = "none"
-}
+})
 
 // End Filter
 
