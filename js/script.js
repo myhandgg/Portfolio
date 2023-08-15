@@ -1,3 +1,16 @@
+// overlay function
+window.addEventListener("load" , () => {
+    setTimeout(function () {
+        window.scrollTo(0, 0);
+        document.querySelector("body").classList.add("overflow")
+        document.querySelector(".overlay").classList.add("show-flex")
+    }, 200)
+    setTimeout(() => {
+        document.querySelector(".overlay").classList.add("opacity")
+        document.querySelector("body").classList.remove("overflow")
+    }, 3200);
+})
+
 // Menu bar
 document.querySelector(".bars").onclick = () => {
     document.querySelector("ul").classList.toggle("show")
@@ -199,11 +212,8 @@ elzero.addEventListener("click" , () =>{
 // End Filter
 
 // Go up button
-window.onload = () => {
-    document.querySelector(".picture").style.opacity = "1"
-}
-
-window.onscroll = () => {
+// Showing up button when scrolling
+window.addEventListener("scroll" , () => {
     if (scrollY >= 500) {
         document.querySelector(".up").classList.add("show")
     } else {
@@ -217,4 +227,4 @@ window.onscroll = () => {
         document.querySelector(".about-h1").style.opacity = "0"
         document.querySelector(".about-section").style.opacity = "0"
     }
-}
+})
